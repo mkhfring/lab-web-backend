@@ -46,14 +46,14 @@ def login():
         if not request.is_json:
             return jsonify({"msg": "Missing JSON in request"}), 400
 
-        username = request.json.get('username', None)
+        email = request.json.get('email', None)
         password = request.json.get('password', None)
 
-        if username is None or password is None:
+        if email is None or password is None:
             return jsonify({"msg": "No username of password is provided"}), 400
 
         error = None
-        member = User.get_member(username)
+        member = User.get_member(email)
 
         if member is None or \
                 not check_password_hash(member.password, password):
@@ -61,7 +61,7 @@ def login():
             return jsonify({"msg": "Bad username or password"}), 401
 
 
-        access_token = create_access_token(identity=username)
+        access_token = create_access_token(identity=email)
         return jsonify(access_token=access_token), 200
 
 
