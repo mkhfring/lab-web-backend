@@ -2,4 +2,5 @@ pudb
 ipython
 pytest
 pytest-pudb
+sqlalchemy-media
 -r requirements-ci.txt
