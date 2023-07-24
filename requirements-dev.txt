@@ -4,4 +4,5 @@ pytest
 pytest-pudb
 sqlalchemy-media
 psycopg2-binary
+gunicorn
 -r requirements-ci.txt

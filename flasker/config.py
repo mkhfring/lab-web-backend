@@ -22,7 +22,7 @@ class DeploymentConfig(Config):
     """
     Deployment Confugartion
     """
-    DBURL = 'postgresql://mkhfring:fardlab12345@localhost:5432/fardlabdb'
+    DBURL = 'sqlite:///flasker.db'
     DEBUG = False
 
 class TestingConfig(Config):

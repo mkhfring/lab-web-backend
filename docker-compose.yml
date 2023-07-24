@@ -1,14 +1,11 @@
-version: '3.1'
+version: '3.8'
 
 services:
-
-  db:
-    image: postgres
-    restart: always
-    environment:
-      POSTGRES_PASSWORD: fardlab12345
-      POSTGRES_USER: mkhfring
-      POSTGRES_DB: fardlabdb
+  app:
+    build: .
+    volumes:
+      - .:/app
     ports:
-      - 5432:5432
-
+      - 5001:5001
+    environment:
+      - FLASK_APP=flasker:create_app
