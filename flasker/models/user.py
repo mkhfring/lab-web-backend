@@ -1,9 +1,11 @@
+from io import BytesIO
+
 from sqlalchemy import Column, Integer, String, JSON
 from sqlalchemy.orm import relationship
 from sqlalchemy_media import File
 
 
-from .db import Base, session, ma
+from .db import Base, session, ma, StoreManager
 
 
 class FileAttachment(File):
@@ -46,6 +48,15 @@ class User(Base):
     def add_member(cls, user):
         session.add(user)
         session.commit()
+        
+        
+    @classmethod
+    def add_avatar(cls, user, avatar_name):
+        avatar_content = open(f'flasker/models/assets/{avatar_name}', "rb").read()
+        with StoreManager(session):
+            user.avatar = BytesIO(avatar_content)
+        session.add(user)
+        session.commit()
 
     @classmethod
     def get_member_by_id(cls, user_id):
@@ -63,8 +74,9 @@ class User(Base):
             try:
                 self._avatar = FileAttachment.create_from(value)
 
-            except ContentTypeValidationError:
-                raise Exception
+            except Exception as e:
+                breakpoint()
+                raise e
 
 class UserSchema(ma.Schema):
 
@@ -76,6 +88,6 @@ class UserSchema(ma.Schema):
             "last_name",
             "email",
             "title",
-            "description"
+            "description",
+            "avatar"
         )
-

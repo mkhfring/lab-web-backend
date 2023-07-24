@@ -16,7 +16,7 @@ member = Blueprint('member', __name__, url_prefix='/apiv1')
 
 
 @member.route('/member', methods=('GET', 'POST'))
-@jwt_required
+@jwt_required()
 def get_member():
     if request.method == 'POST':
         username = get_jwt_identity()

@@ -42,4 +42,3 @@ def test_message_attachment(dbsession):
         message1.attachment = BytesIO(sample_content)
         dbsession.add(message1)
         dbsession.flush()
-
