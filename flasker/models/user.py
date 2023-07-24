@@ -1,3 +1,4 @@
+import os
 from io import BytesIO
 
 from sqlalchemy import Column, Integer, String, JSON
@@ -5,7 +6,7 @@ from sqlalchemy.orm import relationship
 from sqlalchemy_media import File
 
 
-from .db import Base, session, ma, StoreManager
+from .db import Base, session, ma, StoreManager, TEMP_PATH
 
 
 class FileAttachment(File):
@@ -35,6 +36,26 @@ class User(Base):
         self.email = email
         self.title = title
         self.description = description
+        
+        
+    @classmethod
+    def list_members(cls):
+        members = session.query(cls).all()
+        return members
+    
+    @classmethod
+    def edit_member_by_id(cls, id, new_fields):
+        current_member = cls.get_member_by_id(id)
+        if type(new_fields) is not dict:
+            raise Exception('The input has to be a dictionary')
+        
+        for key,value in new_fields.items():
+            if hasattr(current_member, key):
+                current_member.key = value
+                setattr(current_member, key, value)
+        
+        session.commit()
+        return current_member
 
 
     @classmethod
@@ -75,9 +96,14 @@ class User(Base):
                 self._avatar = FileAttachment.create_from(value)
 
             except Exception as e:
-                breakpoint()
                 raise e
 
+    @property
+    def avatar_path(self):
+        with StoreManager(session):
+            return os.path.join(TEMP_PATH, self.avatar.path)
+        
+        
 class UserSchema(ma.Schema):
 
 

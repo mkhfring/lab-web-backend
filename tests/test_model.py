@@ -31,7 +31,20 @@ def test_user(dbsession):
         
     dbsession.add(user2)
     dbsession.flush()
+    
+    members = User.list_members()
+    assert len(members) > 1
+    member_id = members[0].id
+    member = User.edit_member_by_id(
+        member_id, {
+            'first_name': 'Mohamad',
+            'email': 'khajezade.mohamd@gmail.com'
+        }
+    )
+    edited_member = User.get_member_by_id(member_id)
     assert 1 == 1
+    
+    
 
 
 def test_message_attachment(dbsession):
