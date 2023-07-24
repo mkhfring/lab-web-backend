@@ -3,4 +3,5 @@ ipython
 pytest
 pytest-pudb
 sqlalchemy-media
+psycopg2-binary
 -r requirements-ci.txt

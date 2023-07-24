@@ -1,3 +1,4 @@
+import os
 import functools
 
 from sqlalchemy import create_engine
@@ -7,8 +8,15 @@ from flask_marshmallow import Marshmallow
 
 from sqlalchemy_media import  StoreManager, FileSystemStore
 
+from ..config import TestingConfig, DeploymentConfig
 
-engine = create_engine('sqlite:///flasker.db')
+
+if os.getenv('MODE') == 'deployment':
+        cfg = DeploymentConfig()
+else:
+        cfg = TestingConfig()
+        
+engine = create_engine(cfg.DBURL)
 Base = declarative_base()
 Session = sessionmaker(bind=engine)
 session = Session()

@@ -46,13 +46,4 @@ def create_app(test_config=None):
     app.register_blueprint(member.member)
     app.register_blueprint(fake_api.fake)
 
-#    StoreManager.register(
-#        'fs',
-#        functools.partial(
-#            FileSystemStore,
-#            settings.storage.local_directory,
-#            base_url=settings.storage.base_url,
-#        ),
-#        default=True
-#    )
     return app

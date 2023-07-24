@@ -6,8 +6,8 @@ class Config(object):
     """
     Default Configuration
     """
-    base_url = 'http://localhost:5000/assets'
-    TEMP_PATH = '/tmp/sqlalchemy-media'
+    # base_url = 'http://localhost:5000/assets'
+    # TEMP_PATH = '/tmp/sqlalchemy-media'
 
 
 
@@ -22,10 +22,12 @@ class DeploymentConfig(Config):
     """
     Deployment Confugartion
     """
+    DBURL = 'postgresql://mkhfring:fardlab12345@localhost:5432/fardlabdb'
     DEBUG = False
 
 class TestingConfig(Config):
     """Configurations for Testing, with a separate test database."""
     TESTING = True
     DEBUG = True
+    DBURL = 'sqlite:///flasker.db'
 
