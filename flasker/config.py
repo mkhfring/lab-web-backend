@@ -22,12 +22,12 @@ class DeploymentConfig(Config):
     """
     Deployment Confugartion
     """
-    DBURL = 'sqlite:///flasker.db'
+    DBURL = 'sqlite:///lab.db'
     DEBUG = False
 
 class TestingConfig(Config):
     """Configurations for Testing, with a separate test database."""
     TESTING = True
     DEBUG = True
-    DBURL = 'sqlite:///flasker.db'
+    DBURL = 'sqlite:///test.db'
 

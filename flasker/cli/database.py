@@ -17,7 +17,7 @@ def init_db_command():
 @with_appcontext
 def db_mock_command():
     mohamad_dict = {
-        "password":generate_password_hash("Mkh10594"),
+        "password":generate_password_hash("cqvDXAFShq8L"),
         "first_name":"Mohamad",
         "last_name":"Khajezade",
         "email":"khajezade.mohamad@gmail.com",

@@ -8,5 +8,6 @@ __pycache__
 venv/
 *.egg-info/
 .ropeproject
+*.db
 
 
