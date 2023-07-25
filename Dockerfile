@@ -24,7 +24,7 @@ EXPOSE 5001
 
 ENV FLASK_APP=flasker:create_app
 
-RUN flask init_db
-RUN flask add_members
 # Run gunicorn
-CMD ["gunicorn", "-b", ":5001", "server:gunicorn_app"]
+CMD # Run gunicorn
+CMD flask init_db && flask add_members && gunicorn -b :5001 server:gunicorn_app
+
