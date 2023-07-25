@@ -6,6 +6,17 @@ from werkzeug.security import generate_password_hash
 from ..models.db import Base, engine
 from ..models import User
 
+supervisor_description = """
+Dr. Fard is an Assistant Professor at the University of British Columbia (Okanagan Campus). Her research
+interest lies at the intersection of Natural Language Processing and Software Engineering, more
+specifically AI4SE. Dr. Fard and her team develop code intelligence models with a focus on low resource
+languages and with less computational costs. Few shot learning, adapters, and (large) language models
+are at the hearts of her works.\n
+Dr. Fard teaches at the Master of Data Science Program, is a member of CITECH program and MMRI,
+part of the Killam family of scholars, and an IEEE and ACM member. She is a strong advocate of Diversity
+and Inclusion, specifically for underrepresented females in STEM.
+"""
+
 
 @click.command('init_db')
 @with_appcontext
@@ -30,7 +41,7 @@ def db_mock_command():
         "last_name":"HendijaniFard",
         "email":"fatemeh.fard@ubc.ca",
         "title": "Supervisor",
-        "description":"Sample desc."
+        "description":supervisor_description
     }
     if not User.get_member(mohamad_dict["email"]):
         user1 = User(**mohamad_dict)
