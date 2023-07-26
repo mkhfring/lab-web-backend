@@ -17,7 +17,7 @@ def test_login(test_client):
     """
     token_request = test_client.post(
         'auth/login',
-        data=json.dumps({'email':'khajezade.mohamad@gmail.com', 'password':'Mkh10594'}),
+        data=json.dumps({'email':'khajezade.mohamad@gmail.com', 'password':'cqvDXAFShq8L'}),
         headers={'Content-Type': 'application/json'}
     )
     assert token_request.json['access_token'] is not None
