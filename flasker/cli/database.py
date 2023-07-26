@@ -33,7 +33,8 @@ def db_mock_command():
         "last_name":"Khajezade",
         "email":"khajezade.mohamad@gmail.com",
         "title": "PhD Candidate",
-        "description":"sample desc."
+        "description":"sample desc.",
+        "role": "admin"
     }
     fard_dict = {
         "password":generate_password_hash("cqvDXAFShq8L"),
@@ -41,7 +42,8 @@ def db_mock_command():
         "last_name":"HendijaniFard",
         "email":"fatemeh.fard@ubc.ca",
         "title": "Supervisor",
-        "description":supervisor_description
+        "description":supervisor_description,
+        "role": "admin"
     }
     if not User.get_member(mohamad_dict["email"]):
         user1 = User(**mohamad_dict)

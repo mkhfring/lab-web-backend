@@ -25,4 +25,9 @@ def get_member():
             return jsonify({"msg": "Bad Token"}), 400
 
         return jsonify(UserSchema().dump(member))
-
+    
+@member.route('/members', methods=(['GET']))
+def list_members():
+    if request.method =='GET':
+        members_list = User.list_members()
+        return jsonify(UserSchema(many=True).dump(members_list))

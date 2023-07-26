@@ -23,12 +23,13 @@ class User(Base):
     password = Column(String)
     first_name = Column(String)
     last_name = Column(String)
+    role = Column(String)
     email = Column(String)
     title = Column(String)
     description = Column(String)
     _avatar = Column(FileAttachment.as_mutable(JSON))
 
-    def __init__(self, password, first_name, last_name, title, description, email=None):
+    def __init__(self, password, first_name, last_name, title, description,role='user', email=None):
 
         self.password = password
         self.first_name = first_name
@@ -36,6 +37,7 @@ class User(Base):
         self.email = email
         self.title = title
         self.description = description
+        self.role = role
         
         
     @classmethod
@@ -115,5 +117,6 @@ class UserSchema(ma.Schema):
             "email",
             "title",
             "description",
-            "avatar"
+            "avatar",
+            "role"
         )
