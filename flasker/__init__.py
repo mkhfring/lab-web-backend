@@ -4,6 +4,7 @@ import functools
 from flask import Flask
 from flask_jwt_extended import JWTManager
 from sqlalchemy_media import StoreManager, FileSystemStore
+from flask_cors import CORS
 
 from .views import auth, member, fake_api
 from .cli import init_app
@@ -14,6 +15,8 @@ from .models.db import ma
 def create_app(test_config=None):
     # create and configure the app
     app = Flask(__name__, instance_relative_config=True)
+    CORS(app)
+    
     app.config.from_mapping(
         SECRET_KEY='dev',
 #        DATABASE=os.path.join(app.instance_path, 'flaskr.sqlite'),
