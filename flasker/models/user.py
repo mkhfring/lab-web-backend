@@ -29,7 +29,7 @@ class User(Base):
     description = Column(String)
     _avatar = Column(FileAttachment.as_mutable(JSON))
 
-    def __init__(self, password, first_name, last_name, title, description,role='user', email=None):
+    def __init__(self, password, first_name, last_name, title, description, role='user', email=None):
 
         self.password = password
         self.first_name = first_name

@@ -31,19 +31,19 @@ def db_mock_command():
         "password":generate_password_hash("Mkh10594"),
         "first_name":"Mohamad",
         "last_name":"Khajezade",
+        "role": "admin",
         "email":"khajezade.mohamad@gmail.com",
         "title": "PhD Candidate",
         "description":"sample desc.",
-        "role": "admin"
     }
     fard_dict = {
         "password":generate_password_hash("cqvDXAFShq8L"),
         "first_name":"Fatemeh",
         "last_name":"HendijaniFard",
+        "role": "admin",
         "email":"fatemeh.fard@ubc.ca",
         "title": "Supervisor",
-        "description":supervisor_description,
-        "role": "admin"
+        "description":supervisor_description
     }
     if not User.get_member(mohamad_dict["email"]):
         user1 = User(**mohamad_dict)
