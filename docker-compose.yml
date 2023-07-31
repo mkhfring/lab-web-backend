@@ -12,6 +12,6 @@ services:
 
   
   my-angular-app:
-    build: ../lab-website/lab-app/
+    build: ../lab-website/
     ports:
       - "3000:3000"
