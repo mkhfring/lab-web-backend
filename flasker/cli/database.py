@@ -4,7 +4,8 @@ from werkzeug.security import generate_password_hash
 
 
 from ..models.db import Base, engine
-from ..models import User
+from ..models import User, NewsCard, NewsItems, Lab
+
 
 supervisor_description = """
 Dr. Fard is an Assistant Professor at the University of British Columbia (Okanagan Campus). Her research
@@ -15,6 +16,19 @@ are at the hearts of her works.\n
 Dr. Fard teaches at the Master of Data Science Program, is a member of CITECH program and MMRI,
 part of the Killam family of scholars, and an IEEE and ACM member. She is a strong advocate of Diversity
 and Inclusion, specifically for underrepresented females in STEM.
+"""
+
+news1_body = """
+Our emsejournal paper “Evaluating Pre-Trained Models for User Feedback Analysis in Software Engineering: A Study on Classification of App-Reviews” is online.
+"""
+
+
+news2_body = """
+Our emsejournal paper “Evaluating Pre-Trained Models for User Feedback Analysis in Software Engineering: A Study on Classification of App-Reviews” is online.
+"""
+
+lab_summary = """
+Focus of our lab is on developing new techniques to employ language models for code related tasks
 """
 
 
@@ -45,6 +59,7 @@ def db_mock_command():
         "title": "Supervisor",
         "description":supervisor_description
     }
+    
     if not User.get_member(mohamad_dict["email"]):
         user1 = User(**mohamad_dict)
         User.add_avatar(user1, 'mohamad.jpg')
@@ -56,7 +71,25 @@ def db_mock_command():
         User.add_avatar(user2, 'supervisor.jpg')
         User.add_member(user2)
         click.echo("Second member is added")
-
+        
+    if len(NewsItems.get_news_list()) == 0:
+        news1 = NewsItems(body=news1_body)
+        news2 = NewsItems(body=news2_body)
+        NewsItems.add_news(news1)
+        click.echo("First news is added")
+        NewsItems.add_news(news2)
+        click.echo("Second news is added")
+        
+    if not NewsCard.get_news_fied():
+        card = NewsCard(title='Lab News')
+        NewsCard.add_card(card)
+        click.echo("Card is added")
+        
+    if not Lab.get_lab():
+        lab = Lab(title='About our Lab', summary=lab_summary)
+        Lab.add_lab(lab)
+        click.echo("Lab is added")
+        
 
 def init_app(app):
 #    app.teardown_appcontext(close_db)

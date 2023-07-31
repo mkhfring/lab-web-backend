@@ -21,8 +21,10 @@ RUN pip install --no-cache-dir -e .
 
 # Expose the Flask port (5000 by default)
 EXPOSE 5001
+ENV MODE=deployment
 
 ENV FLASK_APP=flasker:create_app
+
 
 # Run gunicorn
 CMD flask init_db && flask add_members && gunicorn -b :5001 server:gunicorn_app

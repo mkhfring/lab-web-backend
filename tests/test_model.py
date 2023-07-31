@@ -2,7 +2,7 @@ from io import BytesIO
 
 from sqlalchemy_media import StoreManager, File
 
-from flasker.models import User, Post, Message
+from flasker.models import User, Post, Message, NewsItems, NewsCard
 
 
 def test_user(dbsession):
@@ -44,8 +44,6 @@ def test_user(dbsession):
     edited_member = User.get_member_by_id(member_id)
     assert 1 == 1
     
-    
-
 
 def test_message_attachment(dbsession):
     message1 = Message(title="example1", body="this is example")
@@ -55,3 +53,18 @@ def test_message_attachment(dbsession):
         message1.attachment = BytesIO(sample_content)
         dbsession.add(message1)
         dbsession.flush()
+
+
+def test_news(dbsession):
+    news_fied = NewsCard(title='NEWS')
+    dbsession.add(news_fied)
+
+    nesw1 = NewsItems(body='This is the first news')
+    new2 = NewsItems(body='This is the second news')
+    assert hasattr(news_fied, 'news_items')
+    news_fied.news_items = [nesw1, new2]
+    dbsession.flush()
+    assert news_fied.news_items[0].body == nesw1.body
+    assert 1 == 1
+    
+    

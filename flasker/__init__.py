@@ -6,7 +6,7 @@ from flask_jwt_extended import JWTManager
 from sqlalchemy_media import StoreManager, FileSystemStore
 from flask_cors import CORS
 
-from .views import auth, member, fake_api
+from .views import auth, member, fake_api, news
 from .cli import init_app
 from .models.db import ma
 
@@ -48,5 +48,7 @@ def create_app(test_config=None):
     app.register_blueprint(auth.bp)
     app.register_blueprint(member.member)
     app.register_blueprint(fake_api.fake)
+    app.register_blueprint(news.news)
+    
 
     return app
