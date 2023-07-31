@@ -9,3 +9,9 @@ services:
       - 5001:5001
     environment:
       - FLASK_APP=flasker:create_app
+
+  
+  my-angular-app:
+    build: ../lab-website/lab-app/
+    ports:
+      - "3000:3000"
