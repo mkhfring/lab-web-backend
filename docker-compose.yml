@@ -10,8 +10,22 @@ services:
     environment:
       - FLASK_APP=flasker:create_app
 
+    networks:
+      - fardnet
+
   
   my-angular-app:
     build: ../lab-website/
     ports:
       - "3000:3000"
+
+    networks:
+      - fardnet
+
+
+networks:
+  fardnet:
+
+    name: fardnet
+
+    driver: bridge
