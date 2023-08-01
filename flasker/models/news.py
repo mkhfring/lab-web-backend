@@ -64,7 +64,29 @@ class NewsItems(Base):
         session.add(news)
         session.commit()
         
-
+        
+    @classmethod
+    def edit_news(cls, id, body):
+        news = session.query(cls).filter(cls.id == id).one_or_none()
+        if not news:
+            return news
+        
+        setattr(news, 'body', body)
+        session.commit()
+        return news
+    
+    @classmethod
+    def delete_news(cls, id):
+        news = session.query(cls).filter(cls.id == id).one_or_none()
+        if news is None:
+            return news
+        
+        session.delete(news)
+        session.commit()
+        return news
+        
+        
+        
 class NewsItemsSchema(ma.Schema):
 
 
