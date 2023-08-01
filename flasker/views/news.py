@@ -137,6 +137,23 @@ def delete_news_item():
         return jsonify(NewsCardSchema().dump(deleted_news)) 
     
     
+@news.route('/get_news', methods=['POST'])
+def get_news():
+    if request.method == 'POST':
+        if not request.is_json:
+            return jsonify({"msg": "Missing JSON in request"}), 400
+        
+        id = request.json.get('id', None)
+        if id is None:
+            return jsonify({"msg": "Id is None"}), 400
+        
+        news = NewsItems.get_news(id)
+        if news is None:
+            return jsonify({"msg": "No News Found"}), 400
+        
+        return jsonify(NewsItemsSchema().dump(news))    
+    
+    
 @news.route('/lab', methods=['GET'])
 def get_lab():
     if request.method == 'GET':

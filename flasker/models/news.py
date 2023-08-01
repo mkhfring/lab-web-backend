@@ -64,6 +64,10 @@ class NewsItems(Base):
         session.add(news)
         session.commit()
         
+    @classmethod
+    def get_news(cls, id):
+        return session.query(cls).filter(cls.id == id).one_or_none()
+        
         
     @classmethod
     def edit_news(cls, id, body):

@@ -77,3 +77,18 @@ def test_get_lab(test_client):
     assert lab_request.json is not None
     assert len(lab_request.json) > 1
     assert 1 == 1
+    
+def test_get_news_by_id(test_client):
+    """
+    GIVEN POST /api/v1/update/offline
+    WHEN a zip file is attached
+    THEN status shoud be 200
+    """
+    news_request = test_client.post(
+        'apiv1/get_news',
+        headers={'Content-Type': 'application/json'},
+        json={'id': 1}
+    )
+    assert news_request.json is not None
+    assert len(news_request.json) > 1
+    assert 1 == 1
